@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  budget_db_container:
+    container_name: budget_db_container
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5006:5432"
+    environment:
+      POSTGRES_USER: qwerty
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: budget
+    volumes:
+      - budget_db_data:/var/lib/postgresql/data
+    networks:
+      - budget-db-network
+
+networks:
+  budget-db-network:
+    driver: bridge
+
+volumes:
+  budget_db_data:
