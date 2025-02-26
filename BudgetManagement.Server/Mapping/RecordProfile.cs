@@ -13,6 +13,7 @@ internal sealed class RecordProfile : Profile
             .ForMember(dest => dest.Amount, opt => opt.MapFrom(src => src.Amount))
             .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt))
             .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => src.CategoryId))
-            .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId));
+            .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
+            .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category != null ? src.Category.Name : null));
     }
 }

@@ -1,31 +1,32 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import type { RouteRecordRaw, RouteRecordName } from 'vue-router';
+import userStateStore from '@/services/stores/user-store';
+import CategoryList from '@/views/category/category-list.vue';
+import RecordList from '@/views/record/record-list.vue';
+import ChartReport from '@/views/record/chart-report.vue';
+import SignInView from '@/views/auth/signin.vue';
+import SignUpView from '@/views/auth/signup.vue';
+import SignOutView from '@/views/auth/signout.vue';
 
 const routes: Array<RouteRecordRaw> = [
-  /*{
+  {
     path: '/',
-    name: 'home',
-    component: HomeView
+    redirect: '/categories',
   },
   {
-    path: '/workspace',
-    name: 'workspace',
-    component: WorkspaceView
+    path: '/categories',
+    name: 'categories',
+    component: CategoryList
   },
   {
-    path: '/admin-panel',
-    name: 'admin-panel',
-    component: AdminPanelView
+    path: '/records',
+    name: 'records',
+    component: RecordList
   },
   {
-    path: '/feed',
-    name: 'feed',
-    component: PublicationFeedView
-  },
-  {
-    path: '/item/:id',
-    name: 'item',
-    component: ContentItemView,
+    path: '/report/:id?',
+    name: 'report',
+    component: ChartReport,
     props: true
   },
   {
@@ -42,7 +43,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/signout',
     name: 'signout',
     component: SignOutView
-  }*/
+  }
 ];
 
 const router = createRouter({
@@ -50,22 +51,14 @@ const router = createRouter({
   routes,
 });
 
-/*router.beforeEach((to, _) => {
+router.beforeEach((to, _) => {
   const store = userStateStore();
 
   let matched = onlyAuthenticated(to.name);
   if (matched && !store.userState.isAuthenticated) {
     return { name: 'signin' };
   }
-
-  matched = onlyAdmin(to.name);
-  if (
-    matched
-    && (!store.userState.isAuthenticated || !userStateStore.isAdmin)
-  ) {
-    return { name: 'signin' };
-  }
-});*/
+});
 
 export default router;
 
@@ -77,22 +70,10 @@ function onlyAuthenticated(routeName: RouteRecordName | undefined | null): boole
     return false;
   }
 
-  const result: boolean = routeName === 'catalog';
-
-  return result;
-}
-
-function onlyAdmin(routeName: RouteRecordName | undefined | null): boolean {
-  if (routeName === undefined) {
-    return false;
-  }
-  else if (routeName === null) {
-    return false;
-  }
-
   const result: boolean =
-    routeName === 'exhibits-table'
-    || routeName === 'categories-list';
+    routeName === 'categories'
+    || routeName === 'records'
+    || routeName === 'report';
 
   return result;
 }

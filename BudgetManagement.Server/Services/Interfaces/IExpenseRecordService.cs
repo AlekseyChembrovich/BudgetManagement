@@ -5,7 +5,14 @@ namespace BudgetManagement.Server.Services.Interfaces;
 public interface IExpenseRecordService
 {
     Task<IReadOnlyList<ExpenseRecord>> GetUserRecordsAsync(Guid userId, CancellationToken cancellationToken = default);
-
+    
+    Task<IReadOnlyList<ExpenseRecord>> GetUserRecordsAsync(
+        Guid userId,
+        Guid? categoryId,
+        DateTime? from,
+        DateTime? to,
+        CancellationToken cancellationToken = default);
+    
     Task<ExpenseRecord> CreateAsync(decimal amount, Guid categoryId, Guid userId, CancellationToken cancellationToken = default);
 
     Task<ExpenseRecord?> DeleteAsync(Guid recordId, CancellationToken cancellationToken = default);

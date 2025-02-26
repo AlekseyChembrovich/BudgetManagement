@@ -9,6 +9,8 @@ public class RecordDto
     public required DateTime CreatedAt { get; init; }
 
     public required Guid CategoryId { get; init; }
-
+    
+    public string? CategoryName { get; init; }
+    
     public required Guid UserId { get; init; }
 }

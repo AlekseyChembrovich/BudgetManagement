@@ -48,7 +48,8 @@ namespace BudgetManagement.Persistence.Migrations
                         column: x => x.root_id,
                         principalSchema: "public",
                         principalTable: "expense_categories",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_expense_categories_users_user_id",
                         column: x => x.user_id,
@@ -123,10 +124,10 @@ namespace BudgetManagement.Persistence.Migrations
                 columns: new[] { "id", "amount", "category_id", "created_at", "user_id" },
                 values: new object[,]
                 {
-                    { new Guid("1888051e-3b87-4bbf-bce7-0d9ea38dce3c"), 15.30m, new Guid("8b506abc-fa2e-46dd-9cd6-b888e3330a5a"), new DateTime(2025, 2, 21, 16, 15, 26, 580, DateTimeKind.Utc).AddTicks(3180), new Guid("20d89285-d9e5-495b-89d5-469d751d111e") },
-                    { new Guid("18d60b25-98c1-4a36-afe6-f0b706b13bff"), 50.75m, new Guid("974fe237-5533-4898-aa01-912455c656d4"), new DateTime(2025, 2, 21, 16, 15, 26, 580, DateTimeKind.Utc).AddTicks(1712), new Guid("0c2ed985-9fa1-415d-8a19-005bd929fd71") },
-                    { new Guid("9d8c1f84-6dbf-4476-9039-aec43c5ff873"), 100.00m, new Guid("80883d5e-da68-40ac-b7dc-e0c50a63acb7"), new DateTime(2025, 2, 21, 16, 15, 26, 580, DateTimeKind.Utc).AddTicks(3184), new Guid("515f0613-b25e-41f0-980b-41eef57eae8a") },
-                    { new Guid("f4fb757d-92a8-417c-9d34-4303ac3211dc"), 200.50m, new Guid("67b3701d-002c-4a72-8a31-09c6bc362c1c"), new DateTime(2025, 2, 21, 16, 15, 26, 580, DateTimeKind.Utc).AddTicks(3186), new Guid("f2c61707-cb8e-44d0-8ed8-3cec4b2d237a") }
+                    { new Guid("1888051e-3b87-4bbf-bce7-0d9ea38dce3c"), 15.30m, new Guid("8b506abc-fa2e-46dd-9cd6-b888e3330a5a"), new DateTime(2025, 2, 26, 22, 3, 43, 13, DateTimeKind.Utc).AddTicks(7934), new Guid("20d89285-d9e5-495b-89d5-469d751d111e") },
+                    { new Guid("18d60b25-98c1-4a36-afe6-f0b706b13bff"), 50.75m, new Guid("974fe237-5533-4898-aa01-912455c656d4"), new DateTime(2025, 2, 26, 22, 3, 43, 13, DateTimeKind.Utc).AddTicks(6435), new Guid("0c2ed985-9fa1-415d-8a19-005bd929fd71") },
+                    { new Guid("9d8c1f84-6dbf-4476-9039-aec43c5ff873"), 100.00m, new Guid("80883d5e-da68-40ac-b7dc-e0c50a63acb7"), new DateTime(2025, 2, 26, 22, 3, 43, 13, DateTimeKind.Utc).AddTicks(7938), new Guid("515f0613-b25e-41f0-980b-41eef57eae8a") },
+                    { new Guid("f4fb757d-92a8-417c-9d34-4303ac3211dc"), 200.50m, new Guid("67b3701d-002c-4a72-8a31-09c6bc362c1c"), new DateTime(2025, 2, 26, 22, 3, 43, 13, DateTimeKind.Utc).AddTicks(7941), new Guid("f2c61707-cb8e-44d0-8ed8-3cec4b2d237a") }
                 });
 
             migrationBuilder.CreateIndex(

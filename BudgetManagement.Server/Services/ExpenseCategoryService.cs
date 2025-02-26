@@ -5,23 +5,46 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BudgetManagement.Server.Services;
 
-public class ExpenseCategoryService(DatabaseContext context) : IExpenseCategoryService
+internal sealed class ExpenseCategoryService(DatabaseContext context) : IExpenseCategoryService
 {
+    public async Task<ExpenseCategory?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+    {
+        var category = await context.Set<ExpenseCategory>()
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+
+        return category;
+    }
+
     public async Task<IReadOnlyList<ExpenseCategory>> GetUserCategoriesAsync(Guid userId, CancellationToken cancellationToken = default)
     {
         return await context.Set<ExpenseCategory>()
             .AsNoTracking()
+            .OrderBy(x => x.Name)
             .Where(x => x.UserId == null || x.UserId == userId)
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<ExpenseCategory> CreateAsync(string name, Guid userId, CancellationToken cancellationToken = default)
+    public async Task<IReadOnlyList<ExpenseCategory>> GetSubCategoriesAsync(Guid rootId, CancellationToken cancellationToken = default)
+    {
+        return await context.Set<ExpenseCategory>()
+            .AsNoTracking()
+            .Where(x => x.RootId == rootId)
+            .ToListAsync(cancellationToken);
+    }
+
+    public async Task<ExpenseCategory> CreateAsync(
+        string name,
+        Guid userId,
+        Guid? rootId = null,
+        CancellationToken cancellationToken = default)
     {
         var newCategory = new ExpenseCategory
         {
             Id = Guid.NewGuid(),
             Name = name,
-            UserId = userId
+            UserId = userId,
+            RootId = rootId
         };
 
         var entry = await context.Set<ExpenseCategory>()

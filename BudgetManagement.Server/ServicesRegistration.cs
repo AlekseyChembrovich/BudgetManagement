@@ -17,6 +17,7 @@ internal static class ServicesRegistration
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IExpenseCategoryService, ExpenseCategoryService>();
         services.AddScoped<IExpenseRecordService, ExpenseRecordService>();
+        services.AddScoped<ITreeBuilder, TreeBuilder>();
 
         services.Configure<AuthConfiguration>(configuration.GetSection(AuthConfiguration.SectionName));
 

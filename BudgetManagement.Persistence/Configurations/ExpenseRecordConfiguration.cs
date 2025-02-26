@@ -37,7 +37,8 @@ internal sealed class ExpenseRecordConfiguration : IEntityTypeConfiguration<Expe
 
         builder.HasOne(x => x.Category)
             .WithMany()
-            .HasForeignKey(x => x.CategoryId);
+            .HasForeignKey(x => x.CategoryId)
+            .OnDelete(DeleteBehavior.Cascade);
         
         builder.HasOne(x => x.User)
             .WithMany()

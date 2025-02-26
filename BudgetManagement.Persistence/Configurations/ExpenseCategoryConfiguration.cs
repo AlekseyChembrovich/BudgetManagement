@@ -33,7 +33,8 @@ internal sealed class ExpenseCategoryConfiguration : IEntityTypeConfiguration<Ex
 
         builder.HasOne(x => x.Root)
             .WithMany()
-            .HasForeignKey(x => x.RootId);
+            .HasForeignKey(x => x.RootId)
+            .OnDelete(DeleteBehavior.Cascade);
         
         builder.HasData(InitialData.ExpenseCategories);
     }
