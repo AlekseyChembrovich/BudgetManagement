@@ -1,6 +1,8 @@
-﻿namespace BudgetManagement.Server.Auth;
+﻿using System.Runtime.CompilerServices;
 
-internal sealed class AuthConfiguration
+namespace BudgetManagement.Server.Auth;
+
+public sealed class AuthConfiguration
 {
     public static string SectionName => nameof(AuthConfiguration);
 

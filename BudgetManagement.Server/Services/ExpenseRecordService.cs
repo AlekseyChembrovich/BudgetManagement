@@ -83,7 +83,6 @@ internal sealed class ExpenseRecordService(DatabaseContext context) : IExpenseRe
     public async Task<ExpenseRecord?> DeleteAsync(Guid recordId, CancellationToken cancellationToken = default)
     {
         var record = await context.Set<ExpenseRecord>()
-            .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Id == recordId, cancellationToken);
 
         if (record is null)

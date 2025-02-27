@@ -58,7 +58,6 @@ internal sealed class ExpenseCategoryService(DatabaseContext context) : IExpense
     public async Task<ExpenseCategory?> DeleteAsync(Guid categoryId, CancellationToken cancellationToken = default)
     {
         var category = await context.Set<ExpenseCategory>()
-            .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Id == categoryId, cancellationToken);
 
         if (category is null)
@@ -67,7 +66,7 @@ internal sealed class ExpenseCategoryService(DatabaseContext context) : IExpense
         }
 
         _ = context.Set<ExpenseCategory>().Remove(category);
-        await context.SaveChangesAsync(cancellationToken);
+        _ = await context.SaveChangesAsync(cancellationToken);
 
         return category;
     }

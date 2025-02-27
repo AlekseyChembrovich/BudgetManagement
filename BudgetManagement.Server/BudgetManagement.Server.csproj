@@ -32,4 +32,8 @@
     <ProjectReference Include="..\BudgetManagement.Persistence\BudgetManagement.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="BudgetManagement.Tests" />
+  </ItemGroup>
+
 </Project>
